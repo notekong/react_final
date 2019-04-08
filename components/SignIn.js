@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { KeyboardAvoidingView, Alert, TouchableOpacity, TouchableHighlight, Platform, StyleSheet, Text, View, Button, Image, TextInput, Modal } from 'react-native';
 import ItemComponent from '../components/itemComponent';
+import NoteScreen from '../components/Note';
 
 import { addItem } from '../service/serviceInterface';
 import { db } from '../database';
@@ -8,8 +9,6 @@ import { db } from '../database';
 console.disableYellowBox = true;
 
 let itemsRef = db.ref('/items');
-
-import CalendarScreen from '../components/Calendar';
 
 export default class SignInScreen extends React.Component {
 
@@ -45,8 +44,7 @@ export default class SignInScreen extends React.Component {
 
       for (item of this.state.items){
         if ((this.state.signInUsername === item["username"]) && (this.state.signInPassword === item["password"])) {
-          Alert.alert("Welcomet!.")
-          this.props.navigation.navigate('Note')
+          this.props.navigation.navigate('Note', {username: this.state.signInUsername});
         }
 
         else {
