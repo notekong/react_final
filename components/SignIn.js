@@ -41,10 +41,19 @@ export default class SignInScreen extends React.Component {
 
     signInValidation() {
       for (item of this.state.items){
-        console.log(item["username"])
-        console.log(item["password"])
-      } 
-      
+        if (this.state.signInUsername === item["username"]) {
+          if (this.state.signInPassword === item["password"]) {
+            Alert.alert("Username and Password success.")
+          }
+          else {
+            Alert.alert("Password is incorrect")
+          }
+        }
+        else {
+          Alert.alert("Username does not exist.")
+        }
+      }
+
     }
 
     handleChangeUser(e) {
