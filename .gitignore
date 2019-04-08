@@ -5,10 +5,6 @@ npm-debug.*
 *.p12
 *.key
 *.mobileprovision
-<<<<<<< HEAD
-package-lock.json
-package.json
-=======
 package.json
 package-lock.json
->>>>>>> a4f72eb067ff82678d6d4155f8a2f315fed71ff8
+database.js
