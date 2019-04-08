@@ -9,6 +9,8 @@ console.disableYellowBox = true;
 
 let itemsRef = db.ref('/items');
 
+import CalendarScreen from '../components/Calendar';
+
 export default class SignInScreen extends React.Component {
 
   componentDidMount() {
