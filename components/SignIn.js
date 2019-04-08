@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, TouchableOpacity, TouchableHighlight, Platform, StyleSheet, Text, View, Button, Image, TextInput, Modal } from 'react-native';
+import { KeyboardAvoidingView, Alert, TouchableOpacity, TouchableHighlight, Platform, StyleSheet, Text, View, Button, Image, TextInput, Modal } from 'react-native';
 
 import { addItem } from '../service/serviceInterface';
 
@@ -11,11 +11,17 @@ export default class SignInScreen extends React.Component {
         modalVisible: false,
         username: '',
         password: '',
-        error: false
+        error: false,
+        signInUsername: 'error',
+        signInPassword: 'error',
       }
       this.handleChangeUser = this.handleChangeUser.bind(this);
       this.handleChangePass = this.handleChangePass.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleChangeSignInUser = this.handleChangeSignInUser.bind(this);
+      this.handleChangeSignInPass = this.handleChangeSignInPass.bind(this);
+      this.handleSignInSubmit = this.handleSignInSubmit.bind(this);
+
     }
     handleChangeUser(e) {
       this.setState({
@@ -40,6 +46,23 @@ export default class SignInScreen extends React.Component {
 
     }
     
+    handleChangeSignInUser(e) {
+      this.setState({
+        signInUsername: e.nativeEvent.text
+      });
+    }
+
+    handleChangeSignInPass(e) {
+      this.setState({
+        signInPassword: e.nativeEvent.text
+      });
+    }
+
+    handleSignInSubmit() {
+      Alert.alert(
+        'Login info is: ' + this.state.signInUsername + ', ' + this.state.signInPassword + '.'
+      )
+    }
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
@@ -58,7 +81,7 @@ export default class SignInScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset="100" behavior="padding" enabled>
 
         <Modal
           animationType="slide"
@@ -78,6 +101,7 @@ export default class SignInScreen extends React.Component {
 
             <TextInput
               style={styles.userInput}
+              secureTextEntry={true}
               onChange={this.handleChangePass}
               placeholder="Password"
             />
@@ -112,6 +136,7 @@ export default class SignInScreen extends React.Component {
         <TextInput
           style={styles.userInput}
           placeholder="Username"
+          onChange={this.handleChangeSignInUser}
           underlineColorAndroid="white"
           secureTextEntry={false}
         />
@@ -119,13 +144,15 @@ export default class SignInScreen extends React.Component {
         <TextInput
           style={styles.userInput}
           placeholder="Password"
+          onChange={this.handleChangeSignInPass}
           underlineColorAndroid="white"
           secureTextEntry={true}
         />
         <View style={{flexDirection: "row", marginTop:20}}>
           <TouchableOpacity
             onPress={() => { 
-              this.props.navigation.navigate('Note');
+              this.handleSignInSubmit();
+              //this.props.navigation.navigate('Note');
             }}
             style={styles.signInButtons}>
             <Text>Sign In</Text>
@@ -139,7 +166,7 @@ export default class SignInScreen extends React.Component {
             <Text>Register</Text>
           </TouchableHighlight>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
