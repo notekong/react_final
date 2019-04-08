@@ -9,6 +9,8 @@ console.disableYellowBox = true;
 
 let itemsRef = db.ref('/items');
 
+import CalendarScreen from '../components/Calendar';
+
 export default class SignInScreen extends React.Component {
 
   componentDidMount() {
@@ -40,20 +42,17 @@ export default class SignInScreen extends React.Component {
     }
 
     signInValidation() {
+
       for (item of this.state.items){
-        if (this.state.signInUsername === item["username"]) {
-          if (this.state.signInPassword === item["password"]) {
-            this.props.navigation.navigate('Note')
-          }
-          else {
-            Alert.alert("Password is incorrect")
-          }
+        if ((this.state.signInUsername === item["username"]) && (this.state.signInPassword === item["password"])) {
+          Alert.alert("Welcomet!.")
+          this.props.navigation.navigate('Note')
         }
+
         else {
-          Alert.alert("Username does not exist.")
+          Alert.alert("Username and password combination incorrect.")
         }
       }
-
     }
 
     handleChangeUser(e) {
