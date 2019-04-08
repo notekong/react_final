@@ -15,7 +15,7 @@ export function CloseButton({ onClose, children }) {
   );
 }
 
-export default class CalendarScreen extends React.PureComponent<
+export default class CalendarApp extends React.PureComponent<
   {},
   {
     isVisibleModalCustom: boolean,
@@ -54,12 +54,22 @@ export default class CalendarScreen extends React.PureComponent<
   render() {
     return (
       <View>
-        <TouchableHighlight
-          style={styles.closeButton}
+        <Text
+          style={{
+            color: 'white',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginTop: 10,
+            marginRight: 20,
+            width: 110,
+            height: 30,
+            padding: 5,
+            backgroundColor: 'black'
+          }}
           onPress={this.handleOpenCustomModal}
         >
-        <Text>Open Calendar</Text>
-        </TouchableHighlight>
+          Open Calendar
+        </Text>
 
         <Modal
           animationType="fade"
@@ -83,7 +93,7 @@ export default class CalendarScreen extends React.PureComponent<
   }
 }
 
-const styles = StyleSheet.create({
+const calStyles = StyleSheet.create({
   closeButton: {
     top:50,
     height: 50,
