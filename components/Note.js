@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { KeyboardAvoidingView, Alert, TouchableOpacity, TouchableHighlight, Platform, StyleSheet, Text, View, Button, Image, TextInput, Modal } from 'react-native';
 import PropTypes from 'prop-types';
 import { addItem } from '../service/serviceInterface';
+import Calendar from 'react-native-calendario';
+import CalendarApp from '../components/Calendar';
 
 export default class NoteScreen extends React.Component {
 
@@ -60,11 +62,7 @@ export default class NoteScreen extends React.Component {
       fontWeight: 'bold',
     },
     headerRight: (
-      <Button
-        onPress={() => alert('This is a button!')}
-        title="Calendar"
-        color="black"
-      />
+      <CalendarApp />
     )
   };
 
@@ -124,7 +122,6 @@ export default class NoteScreen extends React.Component {
 
 
         <View style={{flexDirection: "row", marginTop:20}}>
-
           <TouchableHighlight
             onPress={() => { 
               this.setModalVisible(true);
