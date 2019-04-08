@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
 import { KeyboardAvoidingView, Alert, TouchableOpacity, TouchableHighlight, Platform, StyleSheet, Text, View, Button, Image, TextInput, Modal } from 'react-native';
+import ItemComponent from '../components/itemComponent';
 
 import { addItem } from '../service/serviceInterface';
+import { db } from '../database';
+
+console.disableYellowBox = true;
+
+let itemsRef = db.ref('/items');
 
 export default class SignInScreen extends React.Component {
+
+  componentDidMount() {
+    itemsRef.on('value', (snapshot) => {
+      let data = snapshot.val();
+      let items = Object.values(data);
+      this.setState({items});
+    });
+  }
 
   constructor(props) {
       super(props);
@@ -14,6 +28,7 @@ export default class SignInScreen extends React.Component {
         error: false,
         signInUsername: 'error',
         signInPassword: 'error',
+        items: []
       }
       this.handleChangeUser = this.handleChangeUser.bind(this);
       this.handleChangePass = this.handleChangePass.bind(this);
@@ -23,6 +38,15 @@ export default class SignInScreen extends React.Component {
       this.handleSignInSubmit = this.handleSignInSubmit.bind(this);
 
     }
+
+    signInValidation() {
+      for (item of this.state.items){
+        console.log(item["username"])
+        console.log(item["password"])
+      } 
+      
+    }
+
     handleChangeUser(e) {
       this.setState({
         username: e.nativeEvent.text
@@ -151,8 +175,7 @@ export default class SignInScreen extends React.Component {
         <View style={{flexDirection: "row", marginTop:20}}>
           <TouchableOpacity
             onPress={() => { 
-              this.handleSignInSubmit();
-              //this.props.navigation.navigate('Note');
+              this.signInValidation();
             }}
             style={styles.signInButtons}>
             <Text>Sign In</Text>
@@ -165,6 +188,16 @@ export default class SignInScreen extends React.Component {
             style={styles.signInButtons}>
             <Text>Register</Text>
           </TouchableHighlight>
+
+          <TouchableHighlight
+            onPress={() => { 
+              <ItemComponent items={this.state.items} />
+              console.log(this.state.items)
+            }}
+            style={styles.signInButtons}>
+            <Text>Test</Text>
+          </TouchableHighlight>
+
         </View>
       </KeyboardAvoidingView>
     );
