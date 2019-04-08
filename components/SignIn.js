@@ -3,6 +3,8 @@ import { KeyboardAvoidingView, Alert, TouchableOpacity, TouchableHighlight, Plat
 
 import { addItem } from '../service/serviceInterface';
 
+import CalendarScreen from '../components/Calendar';
+
 export default class SignInScreen extends React.Component {
 
   constructor(props) {
