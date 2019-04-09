@@ -29,7 +29,8 @@ export default class SignInScreen extends React.Component {
         error: false,
         signInUsername: 'error',
         signInPassword: 'error',
-        items: []
+        items: [],
+        key: '',
       }
       this.handleChangeUser = this.handleChangeUser.bind(this);
       this.handleChangePass = this.handleChangePass.bind(this);
@@ -44,8 +45,8 @@ export default class SignInScreen extends React.Component {
 
       for (item of this.state.items){
         if ((this.state.signInUsername === item["username"]) && (this.state.signInPassword === item["password"])) {
-          this.props.navigation.navigate('Note', {username: this.state.signInUsername});
-
+          this.state.key = item["key"]
+          this.props.navigation.navigate('Note', {key: item["key"]});
         }
 
         else {
