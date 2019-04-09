@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { KeyboardAvoidingView, Alert, TouchableOpacity, TouchableHighlight, Platform, StyleSheet, Text, View, Button, Image, TextInput, Modal } from 'react-native';
 import PropTypes from 'prop-types';
 import { addItem } from '../service/serviceInterface';
+import { updateItem } from '../service/updateServiceInterface';
 import Calendar from 'react-native-calendario';
 import CalendarApp from '../components/Calendar';
 
@@ -16,7 +17,7 @@ export default class NoteScreen extends React.Component {
       title: '',
       details: '',
       error: false,
-      user: navigation.getParam('username', 'NO-ID'),
+      key: navigation.getParam('key'),
     }
 
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
@@ -72,11 +73,8 @@ export default class NoteScreen extends React.Component {
 
 
   render() {
-    
-    // const someId = 
-    // this.setState({user: someId});
-    // console.log(this.state.user);
-    console.log(this.state.user);
+
+    console.log(this.state.key);
     return (
       <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset="100" behavior="padding" enabled>
 
@@ -133,6 +131,7 @@ export default class NoteScreen extends React.Component {
         <View style={{flexDirection: "row", marginTop:20}}>
           <TouchableHighlight
             onPress={() => { 
+              console.log(this.state.key)
               this.setModalVisible(true);
             }}
             style={styles.addButton}>
