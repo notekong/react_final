@@ -5,6 +5,8 @@ import { addItem } from '../service/serviceInterface';
 import Calendar from 'react-native-calendario';
 import CalendarApp from '../components/Calendar';
 
+
+
 export default class NoteScreen extends React.Component {
 
   constructor(props) {
@@ -19,6 +21,11 @@ export default class NoteScreen extends React.Component {
     this.handleChangeDetails = this.handleChangeDetails.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+
+  printUser(username) {
+    console.log(this.props.username);
+  }
 
   handleChangeTitle(e) {
     this.setState({
