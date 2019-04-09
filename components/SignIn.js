@@ -29,7 +29,8 @@ export default class SignInScreen extends React.Component {
         error: false,
         signInUsername: 'error',
         signInPassword: 'error',
-        items: []
+        items: [],
+        key: '',
       }
       this.handleChangeUser = this.handleChangeUser.bind(this);
       this.handleChangePass = this.handleChangePass.bind(this);

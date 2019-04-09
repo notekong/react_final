@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { KeyboardAvoidingView, Alert, TouchableOpacity, TouchableHighlight, Platform, StyleSheet, Text, View, Button, Image, TextInput, Modal } from 'react-native';
+import { KeyboardAvoidingView, Alert, TouchableOpacity, TouchableHighlight, Platform, StyleSheet, Text, View, Button, Image, TextInput, Modal, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import { addItem } from '../service/serviceInterface';
 import { updateItem } from '../service/updateServiceInterface';
 import Calendar from 'react-native-calendario';
 import CalendarApp from '../components/Calendar';
+import ItemComponent from '../components/itemComponent';
 
+import { db } from '../database';
+
+let itemsRef = db.ref('/items');
 
 export default class NoteScreen extends React.Component {
 
@@ -17,7 +21,9 @@ export default class NoteScreen extends React.Component {
       title: '',
       details: '',
       error: false,
-      user: navigation.getParam('username', 'NO-ID'),
+      key: navigation.getParam('key'),
+      items: []
+
     }
 
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
@@ -53,6 +59,7 @@ export default class NoteScreen extends React.Component {
     this.setState({modalVisible: visible});
   }
 
+
   static navigationOptions = {
     title: 'Notes',
     headerStyle: {
@@ -67,8 +74,18 @@ export default class NoteScreen extends React.Component {
     )
   };
 
+  componentDidMount() {
+          itemsRef.on('value', (snapshot) => {
+              let data = snapshot.val();
+              let items = Object.values(data);
+              this.setState({items});
+          });
+  }
+
 
   render() {
+
+    console.log(this.state.key);
     return (
       <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset="100" behavior="padding" enabled>
 
@@ -122,9 +139,19 @@ export default class NoteScreen extends React.Component {
 
 
 
-        <View style={{flexDirection: "row", marginTop:20}}>
+        <View style={{flexDirection: "column"}}>
+          <ScrollView style={styles.noteContainer}>
+            {
+                this.state.items.length > 0
+                ? <ItemComponent items={this.state.items} />
+                : <Text>No items</Text>
+            }
+          </ScrollView>
+
+
           <TouchableHighlight
             onPress={() => { 
+              console.log(this.state.key)
               this.setModalVisible(true);
             }}
             style={styles.addButton}>
@@ -142,6 +169,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#e0d3af',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  noteContainer: {
+    flex: 1,
+    marginTop: 10,
   },
   appName: {
     color: 'white',
@@ -219,6 +250,6 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 2,
     borderRadius: 10,
-  }
+  },
 });
 
