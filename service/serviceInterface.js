@@ -42,5 +42,3 @@ export const addItem = (username, password) => {
   updates['/items/' + newPostKey] = postData;
 
   return db.ref().update(updates);
-
-}
