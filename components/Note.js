@@ -22,6 +22,7 @@ export default class NoteScreen extends React.Component {
       details: '',
       error: false,
       key: navigation.getParam('key'),
+      items: []
 
     }
 
