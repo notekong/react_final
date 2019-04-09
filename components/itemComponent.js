@@ -29,6 +29,7 @@ export default class ItemComponent extends Component {
                 <View key={index}>
                     <Text style={styles.itemtext}>{item.username}</Text>
                     <Text style={styles.itemtext}>{item.password}</Text>
+                    <Text style={styles.itemtext}>{item.key}</Text>
                 </View>
             )
         })}

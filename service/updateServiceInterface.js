@@ -1,14 +1,15 @@
 import { db } from '../database';
 
-export const addItem = (username, password) => {
+export const updateItem = (title, details, userId) => {
+
+  var noteArray = []
+
 
   // Get a key for a new Post.
   var newPostKey = db.ref().child('posts').push().key;
 
   var postData = {
-    username: username,
-    password: password,
-    key: newPostKey
+    notes: noteArray,
   };
 
 
@@ -17,5 +18,4 @@ export const addItem = (username, password) => {
   updates['/items/' + newPostKey] = postData;
 
   return db.ref().update(updates);
-
 }
