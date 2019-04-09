@@ -24,11 +24,6 @@ export default class NoteScreen extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
-  printUser(username) {
-    console.log(this.props.username);
-  }
-
   handleChangeTitle(e) {
     this.setState({
       title: e.nativeEvent.text

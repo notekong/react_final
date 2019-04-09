@@ -44,8 +44,6 @@ export default class SignInScreen extends React.Component {
 
       for (item of this.state.items){
         if ((this.state.signInUsername === item["username"]) && (this.state.signInPassword === item["password"])) {
-          Alert.alert("Welcome " + item["username"] + "!")
-          printUser(this.props.signInUsername)
           this.props.navigation.navigate('Note', {username: this.state.signInUsername});
         }
 
