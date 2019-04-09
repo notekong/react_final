@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { KeyboardAvoidingView, Alert, TouchableOpacity, TouchableHighlight, Platform, StyleSheet, Text, View, Button, Image, TextInput, Modal } from 'react-native';
 import PropTypes from 'prop-types';
 import { addItem } from '../service/serviceInterface';
+import { updateItem } from '../service/updateServiceInterface';
 import Calendar from 'react-native-calendario';
 import CalendarApp from '../components/Calendar';
 
@@ -37,7 +38,7 @@ export default class NoteScreen extends React.Component {
   }
 
   handleSubmit() {
-    addItem(this.state.title, this.state.details);
+    addItem(this.state.title, this.state.details, this.state.user);
     Alert.alert(
       'Note added.',
       'thnks fr th mmrs',
@@ -51,10 +52,6 @@ export default class NoteScreen extends React.Component {
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
-
-  static propTypes = {
-      items: PropTypes.array.isRequired
-  };
 
   static navigationOptions = {
     title: 'Notes',
@@ -72,11 +69,6 @@ export default class NoteScreen extends React.Component {
 
 
   render() {
-    
-    // const someId = 
-    // this.setState({user: someId});
-    // console.log(this.state.user);
-    console.log(this.state.user);
     return (
       <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset="100" behavior="padding" enabled>
 

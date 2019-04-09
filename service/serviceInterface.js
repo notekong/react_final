@@ -1,29 +1,4 @@
-// import { db } from '../database';
-
-// export const addItem = (username, password) => {
-// 	db.ref('/items').push({
-// 		username: username,
-// 		password: password
-// 	});
-// }
-
 import { db } from '../database';
-
-// export const addItem = (username, password) => {
-//   var myRef = db.ref().push();
-//   var key = myRef.key;
-//   console.log(key)
-
-//   var newData={
-//       Username: username,
-//       Password : password,
-//       Key: key,
-//    }
-
-//    db.ref('items/').push(newData);
-
-// }
-
 
 export const addItem = (username, password) => {
 
