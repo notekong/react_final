@@ -6,21 +6,23 @@ import Calendar from 'react-native-calendario';
 import CalendarApp from '../components/Calendar';
 
 
-
 export default class NoteScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    const { navigation } = this.props;
     this.state = {
       modalVisible: false,
       title: '',
       details: '',
       error: false,
+      user: navigation.getParam('username', 'NO-ID'),
     }
+
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangeDetails = this.handleChangeDetails.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    }
+  }
 
 
   printUser(username) {
@@ -75,6 +77,11 @@ export default class NoteScreen extends React.Component {
 
 
   render() {
+    
+    // const someId = 
+    // this.setState({user: someId});
+    // console.log(this.state.user);
+    console.log(this.state.user);
     return (
       <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset="100" behavior="padding" enabled>
 
