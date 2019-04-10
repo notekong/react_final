@@ -3,6 +3,7 @@ import { KeyboardAvoidingView, Alert, TouchableOpacity, TouchableHighlight, Plat
 import PropTypes from 'prop-types';
 import { addItem } from '../service/serviceInterface';
 import { updateItem } from '../service/updateServiceInterface';
+import { deleteItem } from '../service/deleteServiceInterface';
 import Calendar from 'react-native-calendario';
 import CalendarApp from '../components/Calendar';
 import ItemComponent from '../components/itemComponent';
@@ -19,24 +20,20 @@ export default class NoteScreen extends React.Component {
     const { navigation } = this.props;
     this.state = {
       modalVisible: false,
-      title: '',
       details: '',
+      userIndex: '',
+      userIndex: '',
       error: false,
       key: navigation.getParam('key'),
-      items: []
+      items: [],
+      modalTwoVisible: false,
 
     }
-
-    this.handleChangeTitle = this.handleChangeTitle.bind(this);
+    this.handleChangeIndex = this.handleChangeIndex.bind(this);
     this.handleChangeDetails = this.handleChangeDetails.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChangeTitle(e) {
-    this.setState({
-      title: e.nativeEvent.text
-    });
-  }
 
   handleChangeDetails(e) {
     this.setState({
@@ -44,9 +41,15 @@ export default class NoteScreen extends React.Component {
     });
   }
 
+  handleChangeIndex(e) {
+    this.setState({
+      details: e.nativeEvent.text
+    });
+  }
+
   handleSubmit() {
 
-    updateItem(this.state.title, this.state.details, this.state.key, this.state.items);
+    updateItem(this.state.details, this.state.key, this.state.items);
 
     Alert.alert(
       'Note added.',
@@ -58,10 +61,27 @@ export default class NoteScreen extends React.Component {
     )
   }
 
+  handleDelete() {
+
+    deleteItem(this.state.userIndex, this.state.key, this.state.items);
+
+    Alert.alert(
+      'Note Destroyed.',
+      'Note sent to Gulag, Comrade',
+      [
+        {text: 'OK', onPress: () => this.setModalTwoVisible(!this.state.modalTwoVisible)}
+      ],
+      { cancelable: false }
+    )
+  }
+
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
 
+  setModalTwoVisible(visible) {
+    this.setState({modalTwoVisible: visible});
+  }
 
   static navigationOptions = {
     title: 'Notes',
@@ -87,9 +107,10 @@ export default class NoteScreen extends React.Component {
 
 
   render() {
-
+    console.log(this.state.items)
     return (
       <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset="100" behavior="padding" enabled>
+
 
         <LinearGradient
           colors={['#B2DCDF', 'transparent']}
@@ -113,18 +134,13 @@ export default class NoteScreen extends React.Component {
           <View style={styles.modalContainer}>
 
             <Text style={styles.title}>Add a Note</Text>
-            <TextInput
-              style={styles.userInput}
-              onChange={this.handleChangeTitle}
-              placeholder="Title"
-            />
 
             <TextInput
               style={styles.userInputBig}
               multiline = {true}
-              numberOfLines = {10}
+              numberOfLines = {1}
               onChange={this.handleChangeDetails}
-              placeholder="Details"
+              placeholder="Enter your note here!"
             />
 
             <View style={{flexDirection: "row", marginTop:20}}>
@@ -151,7 +167,45 @@ export default class NoteScreen extends React.Component {
           </View>
         </Modal>
 
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.state.modalTwoVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+          }}>
+          <View style={styles.modalContainer}>
 
+            <Text style={styles.title}>Remove a Note</Text>
+            <TextInput
+              style={styles.userInput}
+              onChange={this.handleChangeIndex}
+              placeholder="Title of note to remove"
+            />
+
+            <View style={{flexDirection: "row", marginTop:20}}>
+              <TouchableHighlight
+              style = {styles.button}
+                onPress={() => {
+                  this.setModalTwoVisible(!this.state.modalTwoVisible);
+                }}>
+                <Text style={styles.buttonText}>Cancel</Text>
+              </TouchableHighlight>
+
+              <TouchableHighlight
+                  style = {styles.button}
+                  underlayColor= "white"
+                  onPress = {this.handleDelete}
+                >
+                <Text
+                    style={styles.buttonText}>
+                    Confirm
+                </Text>
+              </TouchableHighlight>
+
+            </View>
+          </View>
+        </Modal>
 
         <View style={{flexDirection: "column"}}>
           <ScrollView style={styles.noteContainer}>
@@ -163,14 +217,27 @@ export default class NoteScreen extends React.Component {
           </ScrollView>
 
 
-          <TouchableHighlight
-            onPress={() => { 
-              this.setModalVisible(true);
-            }}
-            style={styles.addButton}>
-            <Text style={styles.buttonText}>+</Text>
-          </TouchableHighlight>
-        </View>
+          <View style={{flexDirection: "row"}}>
+            <TouchableHighlight
+              onPress={() => { 
+                this.setModalTwoVisible(true);
+              }}
+              style={styles.addButton}>
+              <Text style={styles.buttonText}>-</Text>
+            </TouchableHighlight>
+
+
+
+            <TouchableHighlight
+              onPress={() => { 
+                this.setModalVisible(true);
+              }}
+              style={styles.addButton}>
+              <Text style={styles.buttonText}>+</Text>
+            </TouchableHighlight>
+
+            </View>
+          </View>
       </KeyboardAvoidingView>
     );
   }
