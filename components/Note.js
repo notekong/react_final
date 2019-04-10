@@ -44,7 +44,7 @@ export default class NoteScreen extends React.Component {
   }
 
   handleSubmit() {
-    addItem(this.state.title, this.state.details, this.state.user);
+    updateItem(this.state.title, this.state.details, this.state.key);
     Alert.alert(
       'Note added.',
       'thnks fr th mmrs',

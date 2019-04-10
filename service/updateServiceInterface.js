@@ -1,12 +1,12 @@
 import { db } from '../database';
 
-export const updateItem = (title, details, userId) => {
+export const updateItem = (title, details, key) => {
 
   var noteArray = []
 
 
-  // Get a key for a new Post.
-  var newPostKey = db.ref().child('posts').push().key;
+  // et a key for a new Post.
+  // var newPostKey = db.ref().child('posts').push().key;
 
   var postData = {
     notes: noteArray,
@@ -15,7 +15,7 @@ export const updateItem = (title, details, userId) => {
 
   // Write the new post's data simultaneously in the posts list and the user's post list.
   var updates = {};
-  updates['/items/' + newPostKey] = postData;
+  updates['/items/' + key] = postData;
 
   return db.ref().update(updates);
 }
