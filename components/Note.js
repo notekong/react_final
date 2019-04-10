@@ -7,6 +7,7 @@ import Calendar from 'react-native-calendario';
 import CalendarApp from '../components/Calendar';
 import ItemComponent from '../components/itemComponent';
 
+import { LinearGradient } from 'expo';
 import { db } from '../database';
 
 let itemsRef = db.ref('/items');
@@ -44,7 +45,9 @@ export default class NoteScreen extends React.Component {
   }
 
   handleSubmit() {
+
     updateItem(this.state.title, this.state.details, this.state.key, this.state.items);
+
     Alert.alert(
       'Note added.',
       'thnks fr th mmrs',
@@ -63,7 +66,7 @@ export default class NoteScreen extends React.Component {
   static navigationOptions = {
     title: 'Notes',
     headerStyle: {
-      backgroundColor: '#f4511e',
+      backgroundColor: '#80A189'
     },
     headerTintColor: '#fff',
     headerTintStyle: {
@@ -88,9 +91,21 @@ export default class NoteScreen extends React.Component {
     return (
       <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset="100" behavior="padding" enabled>
 
+        <LinearGradient
+          colors={['#B2DCDF', 'transparent']}
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: 0,
+            height: 300,
+          }}
+        />
+
+
         <Modal
           animationType="slide"
-          transparent={false}
+          transparent={true}
           visible={this.state.modalVisible}
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
@@ -153,7 +168,7 @@ export default class NoteScreen extends React.Component {
               this.setModalVisible(true);
             }}
             style={styles.addButton}>
-            <Text>+</Text>
+            <Text style={styles.buttonText}>+</Text>
           </TouchableHighlight>
         </View>
       </KeyboardAvoidingView>
@@ -179,14 +194,15 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    backgroundColor: '#87C087',
+    backgroundColor: 'rgba(0,0,0,0.8)',
     alignItems: 'center',
     justifyContent: 'center',
   },
   title: {
     marginBottom: 20,
     fontSize: 25,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'white'
   },
   itemInput: {
     height: 50,
@@ -200,14 +216,14 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
-    color: '#111',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    color: 'white'
   },
   button: {
     height: 50,
     width: 100,
     flexDirection: 'row',
-    backgroundColor:'#e0d3af',
+    backgroundColor:'#6CBCA3',
     borderWidth: 1,
     borderRadius: 8,
     margin: 10,
@@ -244,10 +260,12 @@ const styles = StyleSheet.create({
     margin: 10, 
     width: 100, 
     height: 50, 
-    backgroundColor: "#87C087",
+    backgroundColor: "#6CBCA3",
     borderColor: "gray",
     borderWidth: 2,
     borderRadius: 10,
+
+
   },
 });
 
