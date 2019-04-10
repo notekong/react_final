@@ -1,12 +1,11 @@
 import { db } from '../database';
 
-export const updateItem = (details, userId, database) => {
+export const deleteItem = (indexId, userId, database) => {
 
   var noteArray = [];
   var tempUser = '';
   var tempPass = '';
   var tempKey = '';
-  var tempNote = [details];
 
   for (item of database) {
     if ( item["key"] === userId) {
@@ -20,7 +19,7 @@ export const updateItem = (details, userId, database) => {
     }
   }
 
-  noteArray.push(tempNote)
+  noteArray.remove(int(indexId))
 
   console.log(noteArray)
 
