@@ -58,13 +58,17 @@ export default class CalendarApp extends React.PureComponent<
           style={{
             color: 'white',
             fontWeight: 'bold',
+            margin: 10, 
+            width: 120, 
+            height: 50, 
+            backgroundColor: "#6CBCA3",
+            borderColor: "gray",
+            borderWidth: 2,
+            borderRadius: 10,
             textAlign: 'center',
-            marginTop: 10,
-            marginRight: 20,
-            width: 110,
-            height: 30,
-            padding: 5,
-            backgroundColor: 'black'
+            paddingTop: 15,
+            paddingLeft: 10,
+            paddingRight: 10
           }}
           onPress={this.handleOpenCustomModal}
         >
