@@ -10,11 +10,19 @@ const styles = StyleSheet.create({
     itemTitle: {
         fontSize: 24,
         fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    itemTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
     },
     itemDetails: {
-        fontSize: 15,
+        fontSize: 20,
+
     }
 });
+
+
 
 export default class ItemComponent extends Component {
 
@@ -28,8 +36,10 @@ export default class ItemComponent extends Component {
         {this.props.items.map((item, index) => {
             return (
                 <View key={index}>
-                    <Text style={styles.itemTitle}>{item.notes.slice(1).join('\n')}</Text>
-                    <Text style={styles.itemTitle}>----------------------------------</Text>
+                    <Text style={styles.itemTitle}>{item.username}</Text>
+                    <Text style={styles.itemDetails}>{item.notes.slice(1).join('\n')}</Text>
+                    <Text style={styles.itemtext}>----------------------------------</Text>
+
                 </View>
             )
         })}
@@ -37,3 +47,4 @@ export default class ItemComponent extends Component {
     );
   }
 }
+
