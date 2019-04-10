@@ -45,7 +45,9 @@ export default class NoteScreen extends React.Component {
   }
 
   handleSubmit() {
-    addItem(this.state.title, this.state.details, this.state.user);
+
+    updateItem(this.state.title, this.state.details, this.state.key, this.state.items);
+
     Alert.alert(
       'Note added.',
       'thnks fr th mmrs',
@@ -86,7 +88,6 @@ export default class NoteScreen extends React.Component {
 
   render() {
 
-    console.log(this.state.key);
     return (
       <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset="100" behavior="padding" enabled>
 
@@ -164,7 +165,6 @@ export default class NoteScreen extends React.Component {
 
           <TouchableHighlight
             onPress={() => { 
-              console.log(this.state.key)
               this.setModalVisible(true);
             }}
             style={styles.addButton}>
