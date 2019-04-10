@@ -3,6 +3,7 @@ import { KeyboardAvoidingView, Alert, TouchableOpacity, TouchableHighlight, Plat
 import ItemComponent from '../components/itemComponent';
 import NoteScreen from '../components/Note';
 
+import { uniqueUser } from '../service/uniqueUserInterface';
 import { LinearGradient } from 'expo';
 import { addItem } from '../service/serviceInterface';
 import { db } from '../database';

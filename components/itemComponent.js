@@ -6,9 +6,8 @@ const styles = StyleSheet.create({
     itemsList: {
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'space-around',
     },
-    itemtext: {
+    itemTitle: {
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -19,6 +18,7 @@ const styles = StyleSheet.create({
     },
     itemDetails: {
         fontSize: 20,
+
     }
 });
 
@@ -39,6 +39,7 @@ export default class ItemComponent extends Component {
                     <Text style={styles.itemTitle}>{item.username}</Text>
                     <Text style={styles.itemDetails}>{item.notes.slice(1).join('\n')}</Text>
                     <Text style={styles.itemtext}>----------------------------------</Text>
+
                 </View>
             )
         })}
