@@ -1,12 +1,12 @@
 import { db } from '../database';
 
-export const updateItem = (title, details, userId, database) => {
+export const updateItem = (details, userId, database) => {
 
   var noteArray = [];
   var tempUser = '';
   var tempPass = '';
   var tempKey = '';
-  var tempNote = [title, details];
+  var tempNote = [details];
 
   for (item of database) {
     if ( item["key"] === userId) {
@@ -16,16 +16,11 @@ export const updateItem = (title, details, userId, database) => {
       noteArray = item["notes"];
     }
     else {
-      console.log("false")
+      //console.log("false")
     }
   }
 
   noteArray.push(tempNote)
-
-  console.log(noteArray)
-
-  // Get a key for a new Post.
-  // var newPostKey = db.ref().child('posts').push().key;
 
   var postData = {
     username: tempUser,
@@ -35,7 +30,7 @@ export const updateItem = (title, details, userId, database) => {
   };
 
 
-  // Write the new post's data simultaneously in the posts list and the user's post list.
+  // Write the new post's data simultaneously.
   var updates = {};
   updates['/items/' + userId] = postData;
 

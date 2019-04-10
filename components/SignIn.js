@@ -43,28 +43,15 @@ export default class SignInScreen extends React.Component {
     }
 
     signInValidation() {
-      val = 0
       for (item of this.state.items){
         if ((this.state.signInUsername === item["username"]) && (this.state.signInPassword === item["password"])) {
-          val = 1
-        }
-        else {
-          if (val === 1) {
-            val = 1
-          }
-          if (val === 0) {
-            val = 2
-          }
-        }
-      }
-      if (val === 1) {
-          this.state.key = item["key"]
-          this.props.navigation.navigate('Note', {key: item["key"]});
-        }
-      if (val === 2) {
-        Alert.alert("Username and password combination incorrect.")
-      }
+                    this.state.key = item["key"]
+                    this.props.navigation.navigate('Note', {key: item["key"]});
+          }else {
+          console.log("Username and password combination incorrect.")
+                }
     }
+  }
 
     handleChangeUser(e) {
       this.setState({
@@ -219,15 +206,6 @@ export default class SignInScreen extends React.Component {
             }}
             style={styles.signInButtons}>
             <Text style={styles.buttonText}>Register</Text>
-          </TouchableHighlight>
-
-          <TouchableHighlight
-            onPress={() => { 
-              <ItemComponent items={this.state.items} />
-              console.log(this.state.items)
-            }}
-            style={styles.signInButtons}>
-            <Text style={styles.buttonText}>Test</Text>
           </TouchableHighlight>
 
         </View>

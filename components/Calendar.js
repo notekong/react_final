@@ -117,7 +117,7 @@ const calStyles = StyleSheet.create({
 const THEME = {
   activeDayColor: {},
   monthTitleTextStyle: {
-    color: '#6d95da',
+    color: '#6CBCA3',
     fontWeight: '300',
     fontSize: 16,
   },
@@ -130,7 +130,7 @@ const THEME = {
     paddingVertical: 10,
   },
   weekColumnTextStyle: {
-    color: '#b6c1cd',
+    color: '#6CBCA3',
     fontSize: 13,
   },
   nonTouchableDayContainerStyle: {},
@@ -147,10 +147,10 @@ const THEME = {
   dayOutOfRangeTextStyle: {},
   todayContainerStyle: {},
   todayTextStyle: {
-    color: '#6d95da',
+    color: '#6CBCA3',
   },
   activeDayContainerStyle: {
-    backgroundColor: '#6d95da',
+    backgroundColor: '#6CBCA3',
   },
   activeDayTextStyle: {
     color: 'white',
