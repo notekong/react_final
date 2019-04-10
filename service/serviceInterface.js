@@ -8,7 +8,8 @@ export const addItem = (username, password) => {
   var postData = {
     username: username,
     password: password,
-    key: newPostKey
+    key: newPostKey,
+    notes: [[" ", " "], ]
   };
 
 
