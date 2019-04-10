@@ -6,12 +6,13 @@ const styles = StyleSheet.create({
     itemsList: {
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'space-around',
     },
-    itemtext: {
+    itemTitle: {
         fontSize: 24,
         fontWeight: 'bold',
-        textAlign: 'center',
+    },
+    itemDetails: {
+        fontSize: 15,
     }
 });
 
@@ -27,9 +28,8 @@ export default class ItemComponent extends Component {
         {this.props.items.map((item, index) => {
             return (
                 <View key={index}>
-                    <Text style={styles.itemtext}>{item.username}</Text>
-                    <Text style={styles.itemtext}>{item.password}</Text>
-                    <Text style={styles.itemtext}>{item.key}</Text>
+                    <Text style={styles.itemTitle}>{item.notes.slice(1).join('\n')}</Text>
+                    <Text style={styles.itemTitle}>----------------------------------</Text>
                 </View>
             )
         })}

@@ -19,6 +19,7 @@ export default class NoteScreen extends React.Component {
     const { navigation } = this.props;
     this.state = {
       modalVisible: false,
+      modalTwoVisible: false,
       title: '',
       details: '',
       error: false,
@@ -60,6 +61,10 @@ export default class NoteScreen extends React.Component {
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
+  }
+
+  setModalTwoVisible(visible) {
+    this.setState({modalTwoVisible: visible});
   }
 
 
@@ -153,6 +158,57 @@ export default class NoteScreen extends React.Component {
 
 
 
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.state.modalTwoVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+          }}>
+          <View style={styles.modalContainer}>
+
+            <Text style={styles.title}>Remove a Note</Text>
+            <TextInput
+              style={styles.userInput}
+              onChange={this.handleChangeTitle}
+              placeholder="Title of note to remove"
+            />
+
+            <View style={{flexDirection: "row", marginTop:20}}>
+              <TouchableHighlight
+              style = {styles.button}
+                onPress={() => {
+                  this.setModalTwoVisible(!this.state.modalTwoVisible);
+                }}>
+                <Text style={styles.buttonText}>Cancel</Text>
+              </TouchableHighlight>
+
+              <TouchableHighlight
+                  style = {styles.button}
+                  underlayColor= "white"
+                  onPress = {this.handleSubmit}
+                >
+                <Text
+                    style={styles.buttonText}>
+                    Confirm
+                </Text>
+              </TouchableHighlight>
+
+            </View>
+          </View>
+        </Modal>
+
+
+
+
+
+
+
+
+
+
+
+
         <View style={{flexDirection: "column"}}>
           <ScrollView style={styles.noteContainer}>
             {
@@ -163,13 +219,27 @@ export default class NoteScreen extends React.Component {
           </ScrollView>
 
 
-          <TouchableHighlight
-            onPress={() => { 
-              this.setModalVisible(true);
-            }}
-            style={styles.addButton}>
-            <Text style={styles.buttonText}>+</Text>
-          </TouchableHighlight>
+          <View style={{flexDirection: "row"}}>
+            <TouchableHighlight
+              onPress={() => { 
+                this.setModalTwoVisible(true);
+              }}
+              style={styles.addButton}>
+              <Text style={styles.buttonText}>-</Text>
+            </TouchableHighlight>
+
+
+
+            <TouchableHighlight
+              onPress={() => { 
+                this.setModalVisible(true);
+              }}
+              style={styles.addButton}>
+              <Text style={styles.buttonText}>+</Text>
+            </TouchableHighlight>
+
+          </View>
+
         </View>
       </KeyboardAvoidingView>
     );

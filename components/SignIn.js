@@ -3,6 +3,7 @@ import { KeyboardAvoidingView, Alert, TouchableOpacity, TouchableHighlight, Plat
 import ItemComponent from '../components/itemComponent';
 import NoteScreen from '../components/Note';
 
+import { uniqueUser } from '../service/uniqueUserInterface';
 import { LinearGradient } from 'expo';
 import { addItem } from '../service/serviceInterface';
 import { db } from '../database';
@@ -43,28 +44,15 @@ export default class SignInScreen extends React.Component {
     }
 
     signInValidation() {
-      val = 0
       for (item of this.state.items){
         if ((this.state.signInUsername === item["username"]) && (this.state.signInPassword === item["password"])) {
-          val = 1
-        }
-        else {
-          if (val === 1) {
-            val = 1
-          }
-          if (val === 0) {
-            val = 2
-          }
-        }
-      }
-      if (val === 1) {
-          this.state.key = item["key"]
-          this.props.navigation.navigate('Note', {key: item["key"]});
-        }
-      if (val === 2) {
-        Alert.alert("Username and password combination incorrect.")
-      }
+                    this.state.key = item["key"]
+                    this.props.navigation.navigate('Note', {key: item["key"]});
+          }else {
+          Alert.alert("Username and password combination incorrect.")
+                }
     }
+  }
 
     handleChangeUser(e) {
       this.setState({
