@@ -18,7 +18,7 @@ const RootStack = createStackNavigator({
   },
 },
 {
-  initialRouteName: 'Note',
+  initialRouteName: 'SignIn',
 },
 );
 
