@@ -21,8 +21,7 @@ export default class NoteScreen extends React.Component {
     this.state = {
       modalVisible: false,
       details: '',
-      userIndex: '',
-      userIndex: '',
+      userIndex: 'hey',
       error: false,
       key: navigation.getParam('key'),
       items: [],
@@ -32,6 +31,7 @@ export default class NoteScreen extends React.Component {
     this.handleChangeIndex = this.handleChangeIndex.bind(this);
     this.handleChangeDetails = this.handleChangeDetails.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
 
@@ -43,7 +43,7 @@ export default class NoteScreen extends React.Component {
 
   handleChangeIndex(e) {
     this.setState({
-      details: e.nativeEvent.text
+      userIndex: e.nativeEvent.text
     });
   }
 
@@ -52,8 +52,8 @@ export default class NoteScreen extends React.Component {
     updateItem(this.state.details, this.state.key, this.state.items);
 
     Alert.alert(
-      'Note added.',
-      'thnks fr th mmrs',
+      'Note Added',
+      'Note has been added to the database.',
       [
         {text: 'OK', onPress: () => this.setModalVisible(!this.state.modalVisible)}
       ],
@@ -66,8 +66,8 @@ export default class NoteScreen extends React.Component {
     deleteItem(this.state.userIndex, this.state.key, this.state.items);
 
     Alert.alert(
-      'Note Destroyed.',
-      'Note sent to Gulag, Comrade',
+      'Note Deleted',
+      'Note has been removed from the database.',
       [
         {text: 'OK', onPress: () => this.setModalTwoVisible(!this.state.modalTwoVisible)}
       ],
@@ -108,7 +108,6 @@ export default class NoteScreen extends React.Component {
 
 
   render() {
-    console.log(this.state.items)
     return (
       <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset="100" behavior="padding" enabled>
 
@@ -137,11 +136,11 @@ export default class NoteScreen extends React.Component {
             <Text style={styles.title}>Add a Note</Text>
 
             <TextInput
-              style={styles.userInputBig}
+              style={styles.userInput}
               multiline = {true}
               numberOfLines = {1}
               onChange={this.handleChangeDetails}
-              placeholder="Enter your note here!"
+              placeholder="Enter your note here"
             />
 
             <View style={{flexDirection: "row", marginTop:20}}>
@@ -181,7 +180,7 @@ export default class NoteScreen extends React.Component {
             <TextInput
               style={styles.userInput}
               onChange={this.handleChangeIndex}
-              placeholder="Title of note to remove"
+              placeholder="Index of note to delete"
             />
 
             <View style={{flexDirection: "row", marginTop:20}}>
@@ -208,58 +207,7 @@ export default class NoteScreen extends React.Component {
           </View>
         </Modal>
 
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={this.state.modalTwoVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}>
-          <View style={styles.modalContainer}>
-
-            <Text style={styles.title}>Remove a Note</Text>
-            <TextInput
-              style={styles.userInput}
-              onChange={this.handleChangeTitle}
-              placeholder="Title of note to remove"
-            />
-
-            <View style={{flexDirection: "row", marginTop:20}}>
-              <TouchableHighlight
-              style = {styles.button}
-                onPress={() => {
-                  this.setModalTwoVisible(!this.state.modalTwoVisible);
-                }}>
-                <Text style={styles.buttonText}>Cancel</Text>
-              </TouchableHighlight>
-
-              <TouchableHighlight
-                  style = {styles.button}
-                  underlayColor= "white"
-                  onPress = {this.handleSubmit}
-                >
-                <Text
-                    style={styles.buttonText}>
-                    Confirm
-                </Text>
-              </TouchableHighlight>
-
-            </View>
-          </View>
-        </Modal>
-
-
-
-
-
-
-
-
-
-
-
-
-        <View style={{flexDirection: "column"}}>
+        <View style={{flexDirection: "column", alignItems: "center"}}>
           <ScrollView style={styles.noteContainer}>
             {
                 this.state.items.length > 0
@@ -275,7 +223,7 @@ export default class NoteScreen extends React.Component {
                 this.setModalTwoVisible(true);
               }}
               style={styles.addButton}>
-              <Text style={styles.buttonText}>-</Text>
+              <Text style={styles.buttonText}>Delete</Text>
             </TouchableHighlight>
 
 
@@ -285,7 +233,7 @@ export default class NoteScreen extends React.Component {
                 this.setModalVisible(true);
               }}
               style={styles.addButton}>
-              <Text style={styles.buttonText}>+</Text>
+              <Text style={styles.buttonText}>Add</Text>
             </TouchableHighlight>
 
             </View>
@@ -363,17 +311,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
 
   },
-  userInputBig: {
-    marginTop: 10, 
-    marginBottom: 10, 
-    paddingLeft: 10,
-    paddingRight: 10, 
-    backgroundColor: "white", 
-    width: "80%", 
-    borderColor: "gray", 
-    borderWidth: 2,
-    borderRadius: 10
-  },
   addButton: {
     justifyContent: 'center',
     alignItems: 'center', 
@@ -388,4 +325,3 @@ const styles = StyleSheet.create({
 
   },
 });
-

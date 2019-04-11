@@ -13,7 +13,7 @@ export const addItem = (username, password) => {
   };
 
 
-  // Write the new post's data simultaneously in the posts list and the user's post list.
+  // Write the new post's data simultaneously.
   var updates = {};
   updates['/items/' + newPostKey] = postData;
 

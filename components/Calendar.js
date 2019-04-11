@@ -130,7 +130,7 @@ const THEME = {
     paddingVertical: 10,
   },
   weekColumnTextStyle: {
-    color: '#b6c1cd',
+    color: '#6CBCA3',
     fontSize: 13,
   },
   nonTouchableDayContainerStyle: {},
